@@ -56,7 +56,7 @@ func DecodeBody(body *url.Values) (string, string, string, error) {
 		}
 	}
 
-	if name == "" || email == "" || content == "" || subject = "" {
+	if name == "" || email == "" || content == "" || subject == "" {
 		return name, email, content, errors.New("invalid params")
 	}
 
