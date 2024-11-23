@@ -15,6 +15,8 @@ import (
 func main() {
 	godotenv.Load(".env")
 
+	fmt.Println(os.Getenv("GM_PASS"), os.Getenv("GM_EMAIL"))
+
 	http.HandleFunc("POST /send", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 
