@@ -13,10 +13,7 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		fmt.Println(err.Error())
-	}
+	godotenv.Load(".env")
 
 	http.HandleFunc("POST /send", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
