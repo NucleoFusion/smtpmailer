@@ -22,13 +22,13 @@ func main() {
 
 		body := r.PostForm
 
-		name, email, content, err := DecodeBody(&body)
+		name, email, subject, content, err := DecodeBody(&body)
 		if err != nil {
 			io.WriteString(w, err.Error())
 			return
 		}
 
-		go Send("smthing@gmail.com", "Lapis Nucleo", "TEST", MsgMaker(name, email, content))
+		go Send(name, email, subject, MsgMaker(name, email, content))
 	})
 
 	fmt.Println("Listening at " + os.Getenv("PORT"))
@@ -40,6 +40,7 @@ func DecodeBody(body *url.Values) (string, string, string, error) {
 		name    string
 		email   string
 		content string
+		subject string
 	)
 
 	for key, val := range *body {
@@ -50,10 +51,12 @@ func DecodeBody(body *url.Values) (string, string, string, error) {
 			name = val[0]
 		case "content":
 			content = val[0]
+		case "subject":
+			subject = val[0]
 		}
 	}
 
-	if name == "" || email == "" || content == "" {
+	if name == "" || email == "" || content == "" || subject = "" {
 		return name, email, content, errors.New("invalid params")
 	}
 
