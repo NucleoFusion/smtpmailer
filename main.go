@@ -57,10 +57,10 @@ func DecodeBody(body *url.Values) (string, string, string, error) {
 	}
 
 	if name == "" || email == "" || content == "" || subject == "" {
-		return name, email, content, errors.New("invalid params")
+		return name, email, subject, content, errors.New("invalid params")
 	}
 
-	return name, email, content, nil
+	return name, email, subject, content, nil
 }
 
 func MsgMaker(name string, email string, content string) string {
